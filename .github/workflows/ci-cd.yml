@@ -1,0 +1,24 @@
+name: .NET Core CI Pipeline
+
+on:
+  push:
+    branches: [ "master" ] # Triggers automatically whenever you push code to main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # GitHub spins up a clean cloud Linux VM
+
+    steps:
+    - name: Checkout repository code
+      uses: actions/checkout@v4 # Downloads your C# code onto that cloud VM
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4 # Installs the .NET compiler on that VM
+      with:
+        dotnet-version: '8.0' # Adjust this to '6.0' or '7.0' if your local Visual Studio used an older version
+
+    - name: Restore dependencies
+      run: dotnet restore # Automatically downloads any built-in NuGet packages
+
+    - name: Build Solution
+      run: dotnet build --no-restore --configuration Release # Compiles your blank C# code to check for errors
