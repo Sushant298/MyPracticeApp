@@ -22,3 +22,8 @@ jobs:
 
     - name: Build Solution
       run: dotnet build --no-restore --configuration Release # Compiles your blank C# code to check for errors
+
+          # Add this line right at the bottom of your existing script:
+    - name: Run Unit Tests
+      run: dotnet test --no-build --configuration Release
+
